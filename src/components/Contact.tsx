@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useResumeContext } from "../context/ResumeContext"
 import EditableText from "./EditableText"
 import { AddButton, RemoveButton } from "./EditButtons"
@@ -25,6 +25,39 @@ function ContactCard({
     <a href={href} target={target} rel={target ? "noopener noreferrer" : undefined} className={className}>
       {children}
     </a>
+  )
+}
+
+function RevealCard({ value, path, href, icon, label, isEditing, cardClass }: { value: string; path: string; href: string; icon: string; label: string; isEditing: boolean; cardClass: string }) {
+  const [revealed, setRevealed] = useState(false)
+
+  if (isEditing) {
+    return (
+      <div className={cardClass}>
+        <div className="text-2xl mb-3">{icon}</div>
+        <p className="text-sm text-slate-400 mb-1">{label}</p>
+        <EditableText value={value} path={path} as="p" className="text-white font-medium" />
+      </div>
+    )
+  }
+
+  return (
+    <div className={cardClass}>
+      <div className="text-2xl mb-3">{icon}</div>
+      <p className="text-sm text-slate-400 mb-1">{label}</p>
+      {revealed ? (
+        <a href={href} className="text-white font-medium hover:text-blue-400 transition-colors animate-[revealIn_0.4s_ease-out]">
+          {value}
+        </a>
+      ) : (
+        <button
+          onClick={() => setRevealed(true)}
+          className="text-blue-400 font-medium hover:text-blue-300 transition-colors"
+        >
+          Click to Reveal
+        </button>
+      )}
+    </div>
   )
 }
 
@@ -69,27 +102,9 @@ export default function Contact() {
         </p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <ContactCard href={`mailto:${contact.email}`} isEditing={isEditing} className={cardClass}>
-            <div className="text-2xl mb-3">@</div>
-            <p className="text-sm text-slate-400 mb-1">Email</p>
-            <EditableText
-              value={contact.email}
-              path="contact.email"
-              as="p"
-              className="text-white font-medium"
-            />
-          </ContactCard>
+          <RevealCard value={contact.email} path="contact.email" href={`mailto:${contact.email}`} icon="@" label="Email" isEditing={isEditing} cardClass={cardClass} />
 
-          <ContactCard href={`tel:${contact.phone}`} isEditing={isEditing} className={cardClass}>
-            <div className="text-2xl mb-3">P</div>
-            <p className="text-sm text-slate-400 mb-1">Phone</p>
-            <EditableText
-              value={contact.phone}
-              path="contact.phone"
-              as="p"
-              className="text-white font-medium"
-            />
-          </ContactCard>
+          <RevealCard value={contact.phone} path="contact.phone" href={`tel:${contact.phone}`} icon="P" label="Phone" isEditing={isEditing} cardClass={cardClass} />
 
           <ContactCard
             href={`https://maps.google.com/?q=${contact.location}`}
