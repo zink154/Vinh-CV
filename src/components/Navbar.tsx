@@ -51,7 +51,7 @@ export default function Navbar({ dark, onToggleDark }: { dark: boolean; onToggle
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <div
-        className={`pointer-events-auto mt-4 px-2 py-1.5 border transition-all duration-500 ${
+        className={`pointer-events-auto mt-4 px-2 py-1.5 border transition-[background,box-shadow,border-color,backdrop-filter] duration-500 ${
           menuOpen ? "rounded-2xl" : "rounded-full"
         } ${
           scrolled
