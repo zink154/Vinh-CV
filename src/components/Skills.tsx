@@ -19,7 +19,7 @@ export default function Skills() {
   const categoryIds = data.skills.map((_, i) => `skill-cat-${i}`)
 
   const content = (
-    <div className="grid md:grid-cols-2 gap-8">
+    <div className="grid sm:grid-cols-2 gap-8">
       {data.skills.map((group, i) => (
         <SortableItem key={categoryIds[i]} id={categoryIds[i]} showHandle={isEditing}>
           <div>

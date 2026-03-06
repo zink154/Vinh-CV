@@ -50,7 +50,7 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
 
   return (
     <>
-    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-[env(safe-area-inset-top)] pointer-events-none">
       <div
         className={`pointer-events-auto ${hasAdminBar ? "mt-14" : "mt-4"} px-2 py-1.5 border transition-[background,box-shadow,border-color,backdrop-filter] duration-500 rounded-2xl md:rounded-full ${
           scrolled
@@ -62,7 +62,7 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
           {/* Logo */}
           <button
             onClick={() => scrollTo("hero")}
-            className="px-3 py-1.5 text-white font-bold text-sm tracking-tight hover:text-blue-400 transition-colors"
+            className="px-3 py-1.5 text-white font-bold text-sm tracking-tight hover:text-blue-400 transition-colors focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded"
           >
             VP
           </button>
@@ -75,7 +75,7 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
               <button
                 key={s.id}
                 onClick={() => scrollTo(s.id)}
-                className={`relative px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`relative px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
                   active === s.id
                     ? "text-white bg-blue-500/20"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
@@ -94,7 +94,7 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
           {/* Dark mode toggle */}
           <button
             onClick={onToggleDark}
-            className="p-2 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+            className="p-2.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-all focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
             aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
           >
             {dark ? (
@@ -111,10 +111,10 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 text-slate-400 hover:text-white transition-colors"
+            className="md:hidden p-2.5 text-slate-400 hover:text-white transition-colors focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded-full"
             aria-label="Toggle menu"
           >
-            <div className="w-4 flex flex-col gap-[3px]">
+            <div className="w-5 flex flex-col gap-[3px]">
               <span className={`block h-[2px] bg-current transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[5px]" : ""}`} />
               <span className={`block h-[2px] bg-current transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
               <span className={`block h-[2px] bg-current transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[5px]" : ""}`} />
@@ -133,7 +133,7 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
               <button
                 key={s.id}
                 onClick={() => scrollTo(s.id)}
-                className={`block w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
                   active === s.id
                     ? "text-blue-400 bg-blue-400/10"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
@@ -175,7 +175,7 @@ function MobileNav({ active, scrollTo }: { active: string; scrollTo: (id: string
   }, [open])
 
   return (
-    <div ref={navRef} className="fixed bottom-14 right-4 z-40 md:hidden">
+    <div ref={navRef} className="fixed bottom-14 right-[max(1rem,env(safe-area-inset-right))] z-40 md:hidden">
       {/* Expanded list */}
       <div
         className={`overflow-hidden transition-all duration-300 mb-2 ${
@@ -187,7 +187,7 @@ function MobileNav({ active, scrollTo }: { active: string; scrollTo: (id: string
             <div key={s.id} className="flex flex-col items-center">
               <button
                 onClick={() => { scrollTo(s.id); setOpen(false) }}
-                className={`text-[11px] font-medium py-1 transition-all duration-300 ${
+                className={`text-xs font-medium py-2 px-2 rounded transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-400 ${
                   active === s.id
                     ? "text-blue-400"
                     : "text-slate-400 hover:text-white"
@@ -206,7 +206,7 @@ function MobileNav({ active, scrollTo }: { active: string; scrollTo: (id: string
       {/* Collapsed button — shows active section */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/80 backdrop-blur-sm border border-white/10 text-[11px] font-medium text-blue-400 transition-all hover:bg-slate-700/80 ml-auto"
+        className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-800/80 backdrop-blur-sm border border-white/10 text-xs font-medium text-blue-400 transition-all hover:bg-slate-700/80 ml-auto focus-visible:ring-2 focus-visible:ring-blue-400"
       >
         {activeLabel}
         <svg

@@ -44,7 +44,7 @@ export default function DotNav() {
   }
 
   return (
-    <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex items-end">
+    <nav className="fixed right-[max(1.5rem,env(safe-area-inset-right))] top-1/2 -translate-y-1/2 z-40 hidden md:flex items-end">
       {/* Labels */}
       <div className="flex flex-col gap-4">
         {sections.map((s) => {
@@ -53,7 +53,7 @@ export default function DotNav() {
             <button
               key={s.id}
               onClick={() => scrollTo(s.id)}
-              className="flex items-center gap-3 group h-3 justify-end"
+              className="flex items-center gap-3 group h-5 justify-end focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
             >
               <span
                 className={`text-xs font-medium transition-all duration-300 ${
@@ -80,7 +80,7 @@ export default function DotNav() {
             <button
               key={s.id}
               onClick={() => scrollTo(s.id)}
-              className="relative z-10 flex items-center justify-center h-3"
+              className="relative z-10 flex items-center justify-center h-5 w-5 focus-visible:ring-2 focus-visible:ring-blue-400 rounded-full"
             >
               <span
                 className={`rounded-full transition-all duration-300 ${

@@ -161,12 +161,13 @@ export default function Hero() {
               <img
                 src={avatar}
                 alt={name}
-                className="w-52 h-52 md:w-80 md:h-80 rounded-full object-cover shadow-2xl shadow-blue-500/20 ring-4 ring-white/10"
+                className="w-52 h-52 md:w-80 md:h-80 xl:w-96 xl:h-96 rounded-full object-cover shadow-2xl shadow-blue-500/20 ring-4 ring-white/10"
                 onError={() => setImgError(true)}
                 referrerPolicy="no-referrer"
+                loading="lazy"
               />
             ) : (
-              <div className="w-52 h-52 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-blue-400 to-teal-400 flex items-center justify-center text-5xl md:text-7xl font-bold shadow-2xl shadow-blue-500/20 ring-4 ring-white/10">
+              <div className="w-52 h-52 md:w-80 md:h-80 xl:w-96 xl:h-96 rounded-full bg-gradient-to-br from-blue-400 to-teal-400 flex items-center justify-center text-5xl md:text-7xl font-bold shadow-2xl shadow-blue-500/20 ring-4 ring-white/10">
                 {initials}
               </div>
             )}
@@ -184,7 +185,7 @@ export default function Hero() {
             )}
 
             {showUrlInput && (
-              <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-600 rounded-xl p-4 shadow-2xl w-80 z-20">
+              <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-600 rounded-xl p-4 shadow-2xl w-[min(20rem,calc(100vw-3rem))] z-20">
                 <p className="text-sm text-slate-300 mb-2">Paste image URL:</p>
                 <input
                   type="url"

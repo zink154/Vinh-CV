@@ -117,9 +117,9 @@ export default function Contact() {
     >
       <div ref={animRef} className={`max-w-5xl mx-auto w-full transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         {/* Two-column layout */}
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
           {/* Left — heading + description + social links */}
-          <div className="lg:w-2/5 lg:sticky lg:top-24">
+          <div className="md:w-2/5 md:sticky md:top-24">
             <h2 className="text-3xl font-bold mb-2">Get In Touch</h2>
             <div className="w-12 h-1 bg-blue-500 rounded mb-6" />
             <p className="text-slate-300 text-lg mb-8">
@@ -174,7 +174,7 @@ export default function Contact() {
           </div>
 
           {/* Right — contact cards */}
-          <div className="lg:w-3/5 grid sm:grid-cols-2 gap-5 w-full">
+          <div className="md:w-3/5 grid sm:grid-cols-2 gap-5 w-full">
             <RevealCard
               value={contact.email}
               path="contact.email"

@@ -153,6 +153,9 @@ function App() {
       onRemoveItem={handleRemoveItem}
       onReorderItems={handleReorderItems}
     >
+      <a href="#hero" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-blue-500 focus:text-white focus:rounded-lg focus:text-sm">
+        Skip to content
+      </a>
       <Navbar dark={dark} onToggleDark={toggleDark} hasAdminBar={!!user} />
       <DotNav />
       <div className={`h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth bg-white dark:bg-slate-900 ${isEditing ? "pt-12" : ""}`}>

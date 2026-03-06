@@ -33,10 +33,10 @@ export default function WaterCanvas() {
 
     let timeout: ReturnType<typeof setTimeout>
 
-    const handleMove = (e: MouseEvent) => {
+    const updateTrail = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect()
-      mouse.current.x = e.clientX - rect.left
-      mouse.current.y = e.clientY - rect.top
+      mouse.current.x = clientX - rect.left
+      mouse.current.y = clientY - rect.top
       mouse.current.active = true
 
       trail.current.push({
@@ -45,7 +45,6 @@ export default function WaterCanvas() {
         time: Date.now(),
       })
 
-      // Keep trail manageable
       if (trail.current.length > 120) {
         trail.current = trail.current.slice(-120)
       }
@@ -56,7 +55,25 @@ export default function WaterCanvas() {
       }, 150)
     }
 
+    const handleMove = (e: MouseEvent) => {
+      updateTrail(e.clientX, e.clientY)
+    }
+
+    const handleTouch = (e: TouchEvent) => {
+      e.preventDefault()
+      for (let i = 0; i < e.touches.length; i++) {
+        updateTrail(e.touches[i].clientX, e.touches[i].clientY)
+      }
+    }
+
+    const handleTouchEnd = () => {
+      mouse.current.active = false
+    }
+
     canvas.addEventListener("mousemove", handleMove)
+    canvas.addEventListener("touchstart", handleTouch, { passive: false })
+    canvas.addEventListener("touchmove", handleTouch, { passive: false })
+    canvas.addEventListener("touchend", handleTouchEnd)
 
     const trailLife = 1200 // ms
 
@@ -132,6 +149,9 @@ export default function WaterCanvas() {
     return () => {
       window.removeEventListener("resize", resize)
       canvas.removeEventListener("mousemove", handleMove)
+      canvas.removeEventListener("touchstart", handleTouch)
+      canvas.removeEventListener("touchmove", handleTouch)
+      canvas.removeEventListener("touchend", handleTouchEnd)
       cancelAnimationFrame(animId.current)
       clearTimeout(timeout)
     }
