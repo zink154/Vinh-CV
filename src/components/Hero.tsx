@@ -84,8 +84,10 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen snap-start flex items-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden"
     >
-      {/* Interactive water canvas */}
-      <WaterCanvas />
+      {/* Interactive water canvas — desktop only */}
+      <div className="hidden md:block">
+        <WaterCanvas />
+      </div>
 
       {/* Animated background elements */}
       <div className="absolute inset-0 pointer-events-none">
