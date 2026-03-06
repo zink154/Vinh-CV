@@ -147,20 +147,25 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
       </div>
     </nav>
 
-    {/* Mobile floating dots nav */}
-    <div className="fixed right-3 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-3 md:hidden">
-      <div className="py-3 px-1.5 rounded-full bg-slate-900/60 backdrop-blur-sm border border-white/10 flex flex-col items-center gap-3">
-        {sections.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => scrollTo(s.id)}
-            className={`rounded-full transition-all duration-300 ${
-              active === s.id
-                ? "w-2.5 h-2.5 bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.6)]"
-                : "w-2 h-2 bg-white/30 hover:bg-white/60"
-            }`}
-            aria-label={s.label}
-          />
+    {/* Mobile floating nav — bottom-right, vertical labels with lines */}
+    <div className="fixed bottom-4 right-4 z-40 md:hidden">
+      <div className="px-3 py-2.5 rounded-2xl bg-slate-800/80 backdrop-blur-sm border border-white/10 flex flex-col items-center">
+        {sections.map((s, i) => (
+          <div key={s.id} className="flex flex-col items-center">
+            <button
+              onClick={() => scrollTo(s.id)}
+              className={`text-[11px] font-medium py-1 transition-all duration-300 ${
+                active === s.id
+                  ? "text-blue-400"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              {s.label}
+            </button>
+            {i < sections.length - 1 && (
+              <div className="w-px h-2 bg-white/15" />
+            )}
+          </div>
         ))}
       </div>
     </div>
