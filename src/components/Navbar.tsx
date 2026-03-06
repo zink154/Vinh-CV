@@ -148,7 +148,7 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
     </nav>
 
     {/* Mobile floating nav — bottom-right, vertical labels with lines */}
-    <div className="fixed bottom-4 right-4 z-40 md:hidden">
+    <div className="fixed bottom-14 right-4 z-40 md:hidden">
       <div className="px-3 py-2.5 rounded-2xl bg-slate-800/80 backdrop-blur-sm border border-white/10 flex flex-col items-center">
         {sections.map((s, i) => (
           <div key={s.id} className="flex flex-col items-center">
