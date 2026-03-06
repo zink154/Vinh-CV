@@ -9,7 +9,7 @@ const sections = [
   { id: "contact", label: "Contact" },
 ]
 
-export default function Navbar({ dark, onToggleDark }: { dark: boolean; onToggleDark: () => void }) {
+export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: boolean; onToggleDark: () => void; hasAdminBar?: boolean }) {
   const [active, setActive] = useState("hero")
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -51,7 +51,7 @@ export default function Navbar({ dark, onToggleDark }: { dark: boolean; onToggle
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <div
-        className={`pointer-events-auto mt-4 px-2 py-1.5 border transition-[background,box-shadow,border-color,backdrop-filter] duration-500 rounded-2xl md:rounded-full ${
+        className={`pointer-events-auto ${hasAdminBar ? "mt-14" : "mt-4"} px-2 py-1.5 border transition-[background,box-shadow,border-color,backdrop-filter] duration-500 rounded-2xl md:rounded-full ${
           scrolled
             ? "bg-slate-900/80 dark:bg-slate-900/80 backdrop-blur-xl border-white/15 shadow-lg shadow-black/20"
             : "bg-slate-900/40 dark:bg-slate-900/40 backdrop-blur-md border-white/10 shadow-md shadow-black/10"

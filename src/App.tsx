@@ -153,7 +153,7 @@ function App() {
       onRemoveItem={handleRemoveItem}
       onReorderItems={handleReorderItems}
     >
-      <Navbar dark={dark} onToggleDark={toggleDark} />
+      <Navbar dark={dark} onToggleDark={toggleDark} hasAdminBar={!!user} />
       <DotNav />
       <div className={`h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth bg-white dark:bg-slate-900 ${isEditing ? "pt-12" : ""}`}>
         <AdminBar
