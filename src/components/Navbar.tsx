@@ -75,6 +75,7 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
               <button
                 key={s.id}
                 onClick={() => scrollTo(s.id)}
+                aria-current={active === s.id ? "true" : undefined}
                 className={`relative px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-300 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${
                   active === s.id
                     ? "text-white bg-blue-500/20"

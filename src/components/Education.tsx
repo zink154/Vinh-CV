@@ -29,7 +29,7 @@ function EducationCard({
   const { removeItem } = useResumeContext()
 
   return (
-    <div
+    <article
       className={`group p-6 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 bg-white dark:bg-slate-800/50 shadow-sm hover:shadow-lg hover:shadow-blue-500/5 dark:hover:shadow-blue-500/10 hover:border-blue-300/50 dark:hover:border-blue-500/30 hover:-translate-y-0.5 transition-all duration-500 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
@@ -80,7 +80,7 @@ function EducationCard({
           />
         </div>
       )}
-    </div>
+    </article>
   )
 }
 

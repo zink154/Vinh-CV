@@ -216,13 +216,12 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="max-w-5xl mx-auto w-full mt-20 pt-8 border-t border-white/10 text-center text-sm text-slate-500">
+      <footer className="max-w-5xl mx-auto w-full mt-20 pt-8 border-t border-white/10 text-center text-sm text-slate-500">
         <p>
           &copy; {new Date().getFullYear()} {data.name}. Built with React &
           Tailwind CSS.
         </p>
-      </div>
+      </footer>
     </section>
   )
 }

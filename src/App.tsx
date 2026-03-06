@@ -165,12 +165,14 @@ function App() {
           onSave={handleSave}
           saving={saving}
         />
-        <Hero />
-        <Suspense fallback={<SectionSkeleton />}><Experience /></Suspense>
-        <Suspense fallback={<SectionSkeleton />}><Projects /></Suspense>
-        <Suspense fallback={<SectionSkeleton />}><Skills /></Suspense>
-        <Suspense fallback={<SectionSkeleton />}><Education /></Suspense>
-        <Suspense fallback={<SectionSkeleton />}><Contact /></Suspense>
+        <main>
+          <Hero />
+          <Suspense fallback={<SectionSkeleton />}><Experience /></Suspense>
+          <Suspense fallback={<SectionSkeleton />}><Projects /></Suspense>
+          <Suspense fallback={<SectionSkeleton />}><Skills /></Suspense>
+          <Suspense fallback={<SectionSkeleton />}><Education /></Suspense>
+          <Suspense fallback={<SectionSkeleton />}><Contact /></Suspense>
+        </main>
       </div>
     </ResumeProvider>
   )
