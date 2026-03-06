@@ -176,7 +176,7 @@ function MobileNav({ active, scrollTo }: { active: string; scrollTo: (id: string
   }, [open])
 
   return (
-    <div ref={navRef} className="fixed bottom-14 right-[max(1rem,env(safe-area-inset-right))] z-40 md:hidden">
+    <div ref={navRef} className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] z-40 md:hidden">
       {/* Expanded list */}
       <div
         className={`overflow-hidden transition-all duration-300 mb-2 ${

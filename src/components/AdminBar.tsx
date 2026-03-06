@@ -20,7 +20,7 @@ export default function AdminBar({
     return (
       <button
         onClick={login}
-        className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] px-4 py-2.5 text-sm bg-slate-800/80 text-slate-400 rounded-full hover:bg-slate-700 hover:text-white transition-all backdrop-blur-sm z-50 focus-visible:ring-2 focus-visible:ring-blue-400"
+        className="hidden md:block fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] px-4 py-2.5 text-sm bg-slate-800/80 text-slate-400 rounded-full hover:bg-slate-700 hover:text-white transition-all backdrop-blur-sm z-50 focus-visible:ring-2 focus-visible:ring-blue-400"
       >
         Admin
       </button>
