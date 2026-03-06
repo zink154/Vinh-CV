@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const sections = [
   { id: "hero", label: "Home" },
@@ -147,28 +147,78 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
       </div>
     </nav>
 
-    {/* Mobile floating nav — bottom-right, vertical labels with lines */}
-    <div className="fixed bottom-14 right-4 z-40 md:hidden">
-      <div className="px-3 py-2.5 rounded-2xl bg-slate-800/80 backdrop-blur-sm border border-white/10 flex flex-col items-center">
-        {sections.map((s, i) => (
-          <div key={s.id} className="flex flex-col items-center">
-            <button
-              onClick={() => scrollTo(s.id)}
-              className={`text-[11px] font-medium py-1 transition-all duration-300 ${
-                active === s.id
-                  ? "text-blue-400"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              {s.label}
-            </button>
-            {i < sections.length - 1 && (
-              <div className="w-px h-2 bg-white/15" />
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+    {/* Mobile floating nav — collapse/expand */}
+    <MobileNav active={active} scrollTo={scrollTo} />
     </>
+  )
+}
+
+function MobileNav({ active, scrollTo }: { active: string; scrollTo: (id: string) => void }) {
+  const [open, setOpen] = useState(false)
+  const navRef = useRef<HTMLDivElement>(null)
+  const activeLabel = sections.find((s) => s.id === active)?.label ?? "Home"
+
+  // Close on outside tap
+  useEffect(() => {
+    if (!open) return
+    const handler = (e: MouseEvent | TouchEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handler)
+    document.addEventListener("touchstart", handler)
+    return () => {
+      document.removeEventListener("mousedown", handler)
+      document.removeEventListener("touchstart", handler)
+    }
+  }, [open])
+
+  return (
+    <div ref={navRef} className="fixed bottom-14 right-4 z-40 md:hidden">
+      {/* Expanded list */}
+      <div
+        className={`overflow-hidden transition-all duration-300 mb-2 ${
+          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-3 py-2 rounded-2xl bg-slate-800/80 backdrop-blur-sm border border-white/10 flex flex-col items-center">
+          {sections.map((s, i) => (
+            <div key={s.id} className="flex flex-col items-center">
+              <button
+                onClick={() => { scrollTo(s.id); setOpen(false) }}
+                className={`text-[11px] font-medium py-1 transition-all duration-300 ${
+                  active === s.id
+                    ? "text-blue-400"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                {s.label}
+              </button>
+              {i < sections.length - 1 && (
+                <div className="w-px h-2 bg-white/15" />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Collapsed button — shows active section */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/80 backdrop-blur-sm border border-white/10 text-[11px] font-medium text-blue-400 transition-all hover:bg-slate-700/80 ml-auto"
+      >
+        {activeLabel}
+        <svg
+          className={`w-3 h-3 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.5}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+        </svg>
+      </button>
+    </div>
   )
 }
