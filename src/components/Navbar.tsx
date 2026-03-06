@@ -49,6 +49,7 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
   }
 
   return (
+    <>
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <div
         className={`pointer-events-auto ${hasAdminBar ? "mt-14" : "mt-4"} px-2 py-1.5 border transition-[background,box-shadow,border-color,backdrop-filter] duration-500 rounded-2xl md:rounded-full ${
@@ -145,5 +146,24 @@ export default function Navbar({ dark, onToggleDark, hasAdminBar }: { dark: bool
         </div>
       </div>
     </nav>
+
+    {/* Mobile floating dots nav */}
+    <div className="fixed right-3 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-3 md:hidden">
+      <div className="py-3 px-1.5 rounded-full bg-slate-900/60 backdrop-blur-sm border border-white/10 flex flex-col items-center gap-3">
+        {sections.map((s) => (
+          <button
+            key={s.id}
+            onClick={() => scrollTo(s.id)}
+            className={`rounded-full transition-all duration-300 ${
+              active === s.id
+                ? "w-2.5 h-2.5 bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.6)]"
+                : "w-2 h-2 bg-white/30 hover:bg-white/60"
+            }`}
+            aria-label={s.label}
+          />
+        ))}
+      </div>
+    </div>
+    </>
   )
 }
